@@ -1,0 +1,16 @@
+{
+	"name": "runtime",
+	"version": "1.0.0",
+	"description": "",
+	"main": "main.js",
+	"type": "module",
+	"scripts": {
+		"start": "npm i && npm fund && node ."
+	},
+	"keywords": [],
+	"author": "Dummi",
+	"license": "ISC",
+	"dependencies": {
+		"xernerx": "^4.2.1"
+	}
+}
