@@ -1,9 +1,12 @@
-export const Amplifier = '';
-export const ChannelManager = '';
-export const Essence = '';
-export const Metamorphosis = '';
-export const RobloxUtilities = '';
-export const SupercellUtilities = '';
-export const PortalQuiz = '';
-export const YourApps = '';
-export const Zodiac = '';
+export default {
+    Amplifier: '',
+    ChannelManager: '',
+    Essence: '',
+    Metamorphosis: '',
+    PortalQuiz: '',
+    RobloxUtilities: '',
+    SupercellUtilities: '',
+    ToDoListBot: '',
+    YourApps: '',
+    Zodiac: '',
+};
