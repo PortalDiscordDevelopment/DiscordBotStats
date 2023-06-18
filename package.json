@@ -1,18 +1,18 @@
 {
     "name": "runtime",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "",
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "start": "npm run build && npm i && npm fund && nodemon ; node .",
+        "start": "npm run build && npm i && npm fund && node .",
         "build": "npx prettier --write ."
     },
     "keywords": [],
     "author": "Dummi",
     "license": "MIT",
     "dependencies": {
-        "xernerx": "^4.4.1"
+        "xernerx": "^4.4.16"
     },
     "devDependencies": {
         "nodemon": "^2.0.22",
