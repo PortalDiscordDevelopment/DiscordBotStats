@@ -5,8 +5,9 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "start": "npm run build && npm i && npm fund && node .",
-        "build": "npx prettier --write ."
+        "start": "echo Starting processes. && npm run update && npm run build && npm i && npm fund && node . && echo Processes finished",
+        "build": "echo Prettifying code && npx prettier --write .",
+        "update": "echo Updating to latest git version. && git reset HEAD --hard && git pull"
     },
     "keywords": [],
     "author": "Dummi",
