@@ -21,11 +21,8 @@ app.get('/', (request, response) => {
     response.render('index', { table, data });
 });
 
-/**
- ** Put the imported bots inside the array, order doesn't matter, the bot will take time to sign in by its server count.
- */
-
 (async () => {
+    await shell('mkdir bots').catch((e) => e);
     for (const [bot, token] of bots) {
         if (!token) continue;
 
@@ -54,9 +51,9 @@ app.get('/', (request, response) => {
 
                     fs.writeFileSync('./data/data.json', JSON.stringify(dataLog), (err) => err);
 
-                    new Promise((resolve) => setTimeout(resolve, 120000)).then(() => {
-                        console.info('Keeping process running for 2 more minutes.');
+                    console.info('Keeping process running for 2 more minutes.');
 
+                    new Promise((resolve) => setTimeout(resolve, 120000)).then(() => {
                         process.exit();
                     });
                 } else console.info(`Done with ${bot}, loading next one...`);

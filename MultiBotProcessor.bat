@@ -1,7 +1,20 @@
 @REM configuration options
 @echo off
+set dirname=%cd%
 title MultiBotProcessor
 color 0b
+
+echo Looking for data/tokens.js...
+
+if exist "%dirname%\data\tokens.js" (
+    echo Found %dirname%\data\tokens.js file.
+) else (
+    echo Couldn't find tokens.js in %dirname%\data, make sure this file is located in %dirname%\data and named tokens.js, opening file explorer.
+    cd data
+    explorer .
+    pause
+    exit
+)
 
 echo Checking for Node...
 
@@ -34,6 +47,7 @@ echo Updating to latest git version...
 git init
 git remote add origin https://github.com/PortalDiscordDevelopment/MultiBotRunner
 git pull --set-upstream origin main
+cls
 
 echo Finished updating to latest git version.
 echo Installing dependencies...
@@ -48,11 +62,13 @@ echo Finished installing dependencies.
 echo Funding credits...
 
 call npm fund 
+cls
 
 echo Finished funding.
 echo Building files...
 
 call npx prettier --write .
+cls
 
 echo Finished building files.
 echo Starting script...
