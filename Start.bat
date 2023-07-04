@@ -3,12 +3,37 @@
 title MultiProcessor
 color 0b
 
+echo Checking for Node...
+
+where node.exe >nul 2>&1 && set "node=true" || set "node=false"
+
+if "%node%" == "true" (
+    for /F %%F in ('node -v') do echo Using node version %%F
+) else (
+    echo Node not installed, quiting...
+    pause
+    exit
+)
+
+echo Checking for Git
+
+where git.exe  >nul 2>&1 && set "git=true" || set "git=false"
+
+if "%git%" == "true" (
+    for /F %%F in ('git -v') do echo Using git version %%F
+) else (
+    echo Git not installed, quiting...
+    pause
+    exit
+)
 
 echo Updating to latest git version...
 
-git reset HEAD --hard
+@REM git reset HEAD --hard
 
-git pull
+git init
+git remote add origin https://github.com/PortalDiscordDevelopment/MultiBotRunner
+git pull --set-upstream origin main
 
 echo Finished updating to latest git version.
 echo Installing dependencies...
@@ -32,15 +57,15 @@ call npx prettier --write .
 echo Finished building files.
 echo Starting script...
 
-node .
+start http://localhost:4444
 
-@REM start opera.exe
+call node .
 
-@REM set /p name=Name:
+git add data/data.json
+git commit -m "Data log update"
+git push
 
-@REM start npm start
-
-@REM echo %name%
+call npx prettier --write data/data.json
 
 echo.
 echo Script finished, press any key to close.

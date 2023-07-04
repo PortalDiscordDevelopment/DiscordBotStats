@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MultiBotProcessor</title>
+
+        <style>
+            body {
+                background-color: darkslateblue;
+                color: white;
+            }
+            table {
+                text-align: center;
+                padding: 20px;
+                border: 2px solid black;
+                border-radius: 0.5rem;
+            }
+
+            #header {
+                background-color: blueviolet;
+                padding: 25px;
+            }
+
+            th {
+                width: 100px;
+            }
+
+            .bot {
+                text-align: left;
+            }
+        </style>
+
+        <script>
+            setInterval(() => {
+                location.reload();
+            }, 1000);
+        </script>
+    </head>
+    <body>
+        <center>
+            <table>
+                <tr id="header">
+                    <th>Name</th>
+                    <th>Guilds</th>
+                    <th>Users</th>
+                    <th>Shards</th>
+                </tr>
+                <%- table %>
+            </table>
+        </center>
+    </body>
+</html>
