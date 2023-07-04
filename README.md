@@ -1,11 +1,14 @@
 # How to use
 
-1. Create a tokens.js file in data.
+> 1. Download the MultiBotProcessor.bat file.
+>
+> 2. Put all the bot tokens you want to use in ./data/tokens.js
 
-    > Format can be found in `./data`
+```js
+// This is the token format
+export default {
+    botName: 'botToken',
+};
+```
 
-2. Import the bots you need from `./data/tokens.js`
-
-3. Bots you don't want to use keep it as an empty string.
-
-4. run `npm start`.
+> 3. Start the bat file.

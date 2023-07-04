@@ -1,6 +1,6 @@
 @REM configuration options
 @echo off
-title MultiProcessor
+title MultiBotProcessor
 color 0b
 
 echo Checking for Node...
@@ -29,7 +29,7 @@ if "%git%" == "true" (
 
 echo Updating to latest git version...
 
-git reset HEAD --hard
+@REM git reset HEAD --hard
 
 git init
 git remote add origin https://github.com/PortalDiscordDevelopment/MultiBotRunner

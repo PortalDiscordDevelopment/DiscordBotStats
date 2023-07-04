@@ -1,10 +1,11 @@
 import { XernerxShardClient } from 'xernerx';
 import express from 'express';
+import * as fs from 'fs';
+import tokens from './data/tokens.js';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import * as fs from 'fs';
 
-import tokens from './data/tokens.js';
+const shell = promisify(exec);
 
 const bots = Object.entries(tokens);
 const app = express();
@@ -30,6 +31,10 @@ app.get('/', (request, response) => {
 
         console.info(`Starting ${bot}!`);
 
+        console.info(`Updating ${bot} code`);
+
+        fs.writeFileSync(`./bots/${bot}.js`, `import { Client } from '../main.js';\nimport tokens from '../data/tokens.js';\n\nconst client = new Client();\nclient.login(tokens.${bot});`);
+
         let { shards, stats } = new XernerxShardClient(`./bots/${bot}.js`, { token, respawn: true }, { log: { info: true } });
 
         shards = await shards;
@@ -47,10 +52,10 @@ app.get('/', (request, response) => {
 
                     dataLog[Number(Date.now())] = data;
 
-                    fs.writeFileSync('./data/data.json', JSON.stringify(dataLog), (err) => err).then(async () => {
-                        console.info('Keeping the page open for 2 minutes.');
+                    fs.writeFileSync('./data/data.json', JSON.stringify(dataLog), (err) => err);
 
-                        await Promise((resolve) => setTimeout(() => resolve, 120000));
+                    new Promise((resolve) => setTimeout(resolve, 120000)).then(() => {
+                        console.info('Keeping process running for 2 more minutes.');
 
                         process.exit();
                     });

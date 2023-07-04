@@ -1,3 +1,10 @@
+# data
 tokens.js
+
+# Node environment
 package-lock.json
 node_modules
+
+# created files
+bots
+dist
