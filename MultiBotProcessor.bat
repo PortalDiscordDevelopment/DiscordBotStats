@@ -42,7 +42,7 @@ if "%git%" == "true" (
 
 echo Updating to latest git version...
 
-@REM git reset HEAD --hard
+git reset HEAD --hard
 
 git init
 git remote add origin https://github.com/PortalDiscordDevelopment/MultiBotRunner
