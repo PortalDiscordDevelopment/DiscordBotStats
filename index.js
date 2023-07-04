@@ -47,7 +47,13 @@ app.get('/', (request, response) => {
 
                     dataLog[Number(Date.now())] = data;
 
-                    fs.writeFileSync('./data/data.json', JSON.stringify(dataLog), (err) => err);
+                    fs.writeFileSync('./data/data.json', JSON.stringify(dataLog), (err) => err).then(async () => {
+                        console.info('Keeping the page open for 2 minutes.');
+
+                        await Promise((resolve) => setTimeout(() => resolve, 120000));
+
+                        process.exit();
+                    });
                 } else console.info(`Done with ${bot}, loading next one...`);
             }
         }, 1000);

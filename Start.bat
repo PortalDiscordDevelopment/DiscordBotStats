@@ -29,7 +29,7 @@ if "%git%" == "true" (
 
 echo Updating to latest git version...
 
-@REM git reset HEAD --hard
+git reset HEAD --hard
 
 git init
 git remote add origin https://github.com/PortalDiscordDevelopment/MultiBotRunner
@@ -61,11 +61,14 @@ start http://localhost:4444
 
 call node .
 
+echo Updating data log...
+call npx prettier --write data/data.json
+
 git add data/data.json
 git commit -m "Data log update"
 git push
 
-call npx prettier --write data/data.json
+echo Updated data log!
 
 echo.
 echo Script finished, press any key to close.
