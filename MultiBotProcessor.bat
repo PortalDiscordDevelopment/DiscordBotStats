@@ -85,6 +85,7 @@ git commit -m "Data log update"
 git push
 
 echo Updated data log!
+cls
 
 echo.
 echo Script finished, press any key to close.
