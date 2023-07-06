@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Charts</title>
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script>
+            fetch('https://raw.githubusercontent.com/PortalDiscordDevelopment/MultiBotRunner/main/data/data.json')
+                .then((res) => res.json())
+                .then((data) => {
+                    const table = [['Date']];
+
+                    Object.entries(data).map(([timestamp, v]) => {
+                        Object.keys(v).map((bot) => {
+                            if (!table.at(0).includes(bot)) table.at(0).push(bot);
+                        });
+
+                        console.log();
+
+                        table.push([new Date(Number(timestamp)), ...Object.values(v).map((i) => i.guildCount)]);
+                    });
+
+                    google.charts.load('current', { packages: ['corechart'] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                        const data = google.visualization.arrayToDataTable(table);
+
+                        const options = {
+                            title: 'Total servers',
+                            curveType: 'function',
+                            legend: { position: 'bottom' },
+                        };
+
+                        const chart = new google.visualization.LineChart(document.getElementById('total'));
+
+                        chart.draw(data, options);
+                    }
+                });
+        </script>
+
+        <style>
+            body {
+                background: darkslateblue;
+                text-align: center;
+            }
+
+            .chart {
+                position: absolute;
+                color: grey;
+                border: 2px solid black;
+                border-radius: 0.5rem;
+                height: 50vh;
+                width: 98vw;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="chart" id="total"></div>
+    </body>
+</html>
