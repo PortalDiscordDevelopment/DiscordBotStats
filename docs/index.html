@@ -6,35 +6,43 @@
         <title>Charts</title>
 
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script>
+        <script type="module">
             fetch('https://raw.githubusercontent.com/PortalDiscordDevelopment/MultiBotRunner/main/data/data.json')
                 .then((res) => res.json())
                 .then((data) => {
-                    const table = [['Date']];
+                    const servers = [['Date']],
+                        users = [['Date']],
+                        shards = [['Date']];
 
                     Object.entries(data).map(([timestamp, v]) => {
                         Object.keys(v).map((bot) => {
-                            if (!table.at(0).includes(bot)) table.at(0).push(bot);
+                            if (!servers.at(0).includes(bot)) servers.at(0).push(bot);
+                            if (!users.at(0).includes(bot)) users.at(0).push(bot);
+                            if (!shards.at(0).includes(bot)) shards.at(0).push(bot);
                         });
 
-                        console.log();
-
-                        table.push([new Date(Number(timestamp)), ...Object.values(v).map((i) => i.guildCount)]);
+                        servers.push([new Date(Number(timestamp)), ...Object.values(v).map((i) => i.guildCount)]);
+                        users.push([new Date(Number(timestamp)), ...Object.values(v).map((i) => i.userCount)]);
+                        shards.push([new Date(Number(timestamp)), ...Object.values(v).map((i) => i.shardCount)]);
                     });
 
                     google.charts.load('current', { packages: ['corechart'] });
-                    google.charts.setOnLoadCallback(drawChart);
+                    google.charts.setOnLoadCallback(() => {
+                        drawChart('Total Servers', servers);
+                        drawChart('Total Users', users);
+                        drawChart('Total Shards', shards);
+                    });
 
-                    function drawChart() {
+                    function drawChart(title, table) {
                         const data = google.visualization.arrayToDataTable(table);
 
                         const options = {
-                            title: 'Total servers',
+                            title,
                             curveType: 'function',
                             legend: { position: 'bottom' },
                         };
 
-                        const chart = new google.visualization.LineChart(document.getElementById('total'));
+                        const chart = new google.visualization.LineChart(document.getElementById(title.replace(/ +/gim, '')));
 
                         chart.draw(data, options);
                     }
@@ -48,16 +56,19 @@
             }
 
             .chart {
-                position: absolute;
+                background-color: white;
                 color: grey;
                 border: 2px solid black;
                 border-radius: 0.5rem;
                 height: 50vh;
-                width: 98vw;
+                margin: 10px;
+                padding: 5px;
             }
         </style>
     </head>
     <body>
-        <div class="chart" id="total"></div>
+        <div class="chart" id="TotalServers"></div>
+        <div class="chart" id="TotalUsers"></div>
+        <div class="chart" id="TotalShards"></div>
     </body>
 </html>
