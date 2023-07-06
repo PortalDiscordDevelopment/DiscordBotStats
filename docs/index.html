@@ -18,6 +18,12 @@
 
                     const div = document.getElementById('latest');
 
+                    const total = { users: 0, servers: 0 };
+                    Object.values(latest).map((value) => {
+                        total.servers += value.guildCount;
+                        total.users += value.userCount;
+                    });
+
                     div.innerHTML = `<center>
                         <h1>The latest 5 data updates</h1>
                         <p>The table displays the 5 most recent data updates, the gain column shows the difference between the most recent and the one to last most recent data.</p>
@@ -43,7 +49,17 @@
                                     }">${dif}</td></tr>`;
                                 })
                                 .join('')}
-                        </table></center>`;
+                        </table>
+                        <h1>Total Stats</h1>
+                        <table>
+                            <tr class="trHeader">
+                                <th>Bots</th><th>Servers</th><th>Users</th>
+                            </tr>   
+                            <tr class="trStats">
+                                <td>${Object.keys(latest).length}</td><td>${total.servers}</td><td>${total.users}</td>
+                            </tr>
+                        </table>
+                        </center>`;
 
                     const servers = [['Date']],
                         users = [['Date']],
@@ -88,25 +104,16 @@
             body {
                 background: darkslateblue;
                 text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
             }
 
             .chart {
                 background-color: white;
                 border: 2px solid black;
                 border-radius: 0.5rem;
-                height: 50vh;
+                height: 60vh;
                 margin: 10px;
                 padding: 5px;
-            }
-
-            th {
-                padding: 15px;
-            }
-
-            td {
-                text-align: right;
-                padding-left: 10px;
-                padding-right: 10px;
             }
 
             .tdName {
@@ -124,6 +131,16 @@
 
             .loss {
                 color: red;
+            }
+
+            th {
+                padding: 15px;
+            }
+
+            td {
+                text-align: center;
+                padding-left: 10px;
+                padding-right: 10px;
             }
 
             .Amplifier {

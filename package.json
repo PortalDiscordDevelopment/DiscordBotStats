@@ -5,7 +5,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "start": "start http://localhost:4444 && node ."
+        "start": "start MultiBotProcessor.bat"
     },
     "keywords": [],
     "author": "Dummi",

@@ -87,6 +87,8 @@ git push
 echo Updated data log!
 cls
 
+start https://portaldiscorddevelopment.github.io/MultiBotRunner/
+
 echo.
 echo Script finished, press any key to close.
 pause > nul
