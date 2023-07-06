@@ -10,6 +10,41 @@
             fetch('https://raw.githubusercontent.com/PortalDiscordDevelopment/MultiBotRunner/main/data/data.json')
                 .then((res) => res.json())
                 .then((data) => {
+                    const latest = data[Object.keys(data)[Object.keys(data).length - 1]];
+                    const last1 = data[Object.keys(data)[Object.keys(data).length - 2]];
+                    const last2 = data[Object.keys(data)[Object.keys(data).length - 3]];
+                    const last3 = data[Object.keys(data)[Object.keys(data).length - 4]];
+                    const last4 = data[Object.keys(data)[Object.keys(data).length - 5]];
+
+                    const div = document.getElementById('latest');
+
+                    div.innerHTML = `<center>
+                        <h1>The latest 5 data updates</h1>
+                        <p>The table displays the 5 most recent data updates, the gain column shows the difference between the most recent and the one to last most recent data.</p>
+                        <table>
+                        <tr class="trHeader">
+                            <th>Bot</th><th>${new Date(Number(Object.keys(data).slice(Object.keys(data).length - 5, Object.keys(data).length - 4))).toDateString()}</th><th>${new Date(
+                        Number(Object.keys(data).slice(Object.keys(data).length - 4, Object.keys(data).length - 3))
+                    ).toDateString()}</th><th>${new Date(Number(Object.keys(data).slice(Object.keys(data).length - 3, Object.keys(data).length - 2))).toDateString()}</th><th>${new Date(
+                        Number(Object.keys(data).slice(Object.keys(data).length - 2, Object.keys(data).length - 1))
+                    ).toDateString()} (Last)</th><th>${new Date(Number(Object.keys(data).pop())).toDateString()} (Latest)</th><th>Gain (Latest - Last)</th>
+                        </tr>
+                            ${Object.keys(latest)
+                                .map((key) => {
+                                    const pre1 = last1[key].guildCount;
+                                    const pre2 = last2[key].guildCount;
+                                    const pre3 = last3[key].guildCount;
+                                    const pre4 = last4[key].guildCount;
+                                    const post = latest[key].guildCount;
+                                    const dif = post - pre1;
+
+                                    return `<tr class="${key}"><td class="tdName">${key}</td><td>${pre4}</td><td>${pre3}</td><td>${pre2}</td><td>${pre1}</td><td>${post}</td><td class="${
+                                        dif >= 0 ? 'gain' : 'loss'
+                                    }">${dif}</td></tr>`;
+                                })
+                                .join('')}
+                        </table></center>`;
+
                     const servers = [['Date']],
                         users = [['Date']],
                         shards = [['Date']];
@@ -57,16 +92,77 @@
 
             .chart {
                 background-color: white;
-                color: grey;
                 border: 2px solid black;
                 border-radius: 0.5rem;
                 height: 50vh;
                 margin: 10px;
                 padding: 5px;
             }
+
+            th {
+                padding: 15px;
+            }
+
+            td {
+                text-align: right;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .tdName {
+                text-align: left;
+            }
+
+            .trHeader {
+                background-color: darkslategrey;
+                color: white;
+            }
+
+            .gain {
+                color: greenyellow;
+            }
+
+            .loss {
+                color: red;
+            }
+
+            .Amplifier {
+                background-color: orangered;
+            }
+
+            .ChannelManager {
+                background-color: purple;
+                color: white;
+            }
+            .Essence {
+                background-color: white;
+            }
+            .Metamorphosis {
+                background-color: lightblue;
+            }
+            .PortalQuiz {
+                background-color: pink;
+            }
+            .RobloxUtilities {
+                background-color: grey;
+            }
+            .SupercellUtilities {
+                background-color: yellow;
+            }
+            .ToDoListBot {
+                background-color: green;
+            }
+            .YourApps {
+                background-color: orange;
+            }
+            .Zodiac {
+                background-color: blue;
+                color: white;
+            }
         </style>
     </head>
     <body>
+        <div class="chart" id="latest"></div>
         <div class="chart" id="TotalServers"></div>
         <div class="chart" id="TotalUsers"></div>
         <div class="chart" id="TotalShards"></div>
