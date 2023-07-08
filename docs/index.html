@@ -37,11 +37,11 @@
                         </tr>
                             ${Object.keys(latest)
                                 .map((key) => {
-                                    const pre1 = last1[key].guildCount;
-                                    const pre2 = last2[key].guildCount;
-                                    const pre3 = last3[key].guildCount;
-                                    const pre4 = last4[key].guildCount;
-                                    const post = latest[key].guildCount;
+                                    const pre1 = last1[key]?.guildCount || 0;
+                                    const pre2 = last2[key]?.guildCount || 0;
+                                    const pre3 = last3[key]?.guildCount || 0;
+                                    const pre4 = last4[key]?.guildCount || 0;
+                                    const post = latest[key]?.guildCount || 0;
                                     const dif = post - pre1;
 
                                     return `<tr class="${key}"><td class="tdName">${key}</td><td>${pre4}</td><td>${pre3}</td><td>${pre2}</td><td>${pre1}</td><td>${post}</td><td class="${

@@ -11,6 +11,8 @@ const bots = Object.entries(tokens);
 const app = express();
 const data = {};
 
+const dataLog = JSON.parse(fs.readFileSync('./data/data.json', 'utf-8'));
+
 app.set('view engine', 'ejs');
 
 app.get('/', (request, response) => {
@@ -45,9 +47,32 @@ app.get('/', (request, response) => {
                 if (bots.length == Object.keys(data).length) {
                     console.table(data);
 
-                    const dataLog = JSON.parse(fs.readFileSync('./data/data.json', 'utf-8'));
-
                     dataLog[Number(Date.now())] = data;
+
+                    // ! _______________________________________________________
+
+                    // * Checks all pre-existing bots that have recorded data.
+                    let botList = Object.keys(dataLog[Object.keys(dataLog)[Object.keys(data).length - 1]]);
+
+                    // * Checks for new bots, if so, add it to the botList.
+                    Object.keys(data).map((bot) => (!botList.includes(bot) ? botList.push(bot) : null));
+
+                    // * Sorts the botList, as it's defaulted to the token order provided.
+                    botList = botList.sort();
+
+                    // * Make a new object that'll sort the data values correctly, otherwise I'd had to work with delete key (that's a good idea...)
+                    Object.entries(dataLog).map(([timestamp, data]) => {
+                        const botData = {};
+
+                        botList.map((bot) => {
+                            if (data[bot]) botData[bot] = data[bot];
+                            else botData[bot] = {};
+                        });
+
+                        // * Assign the new sorted data object to the correct timestamp.
+                        dataLog[timestamp] = botData;
+                    });
+                    // ! _______________________________________________________
 
                     fs.writeFileSync('./data/data.json', JSON.stringify(dataLog), (err) => err);
 
