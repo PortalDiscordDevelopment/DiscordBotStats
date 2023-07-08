@@ -42,7 +42,7 @@ if "%git%" == "true" (
 
 echo Updating to latest git version...
 
-git reset HEAD --hard
+@REM git reset HEAD --hard
 
 git init
 git remote add origin https://github.com/PortalDiscordDevelopment/MultiBotRunner
@@ -74,7 +74,9 @@ echo Finished building files.
 echo Starting script...
 
 start http://localhost:4444
+start https://portaldiscorddevelopment.github.io/MultiBotRunner/
 
+:loop
 call node .
 
 echo Updating data log...
@@ -87,9 +89,10 @@ git push
 echo Updated data log!
 cls
 
-start https://portaldiscorddevelopment.github.io/MultiBotRunner/
 
 echo.
-echo Script finished, press any key to close.
-pause > nul
-exit
+echo Script finished, running again in....
+
+sleep 20
+
+goto loop

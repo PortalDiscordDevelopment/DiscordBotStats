@@ -20,8 +20,8 @@
 
                     const total = { users: 0, servers: 0 };
                     Object.values(latest).map((value) => {
-                        total.servers += value.guildCount;
-                        total.users += value.userCount;
+                        total.servers += value?.guildCount || 0;
+                        total.users += value?.userCount || 0;
                     });
 
                     div.innerHTML = `<center>
