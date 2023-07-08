@@ -25,8 +25,12 @@ app.get('/', (request, response) => {
 
 (async () => {
     await shell('mkdir bots').catch((e) => e);
+
     for (const [bot, token] of bots) {
-        if (!token) continue;
+        if (!token) {
+            console.warn(`No token for ${bot} provided. Skipping...`);
+            continue;
+        }
 
         console.info(`Starting ${bot}!`);
 
@@ -44,7 +48,7 @@ app.get('/', (request, response) => {
 
                 data[bot] = stats;
 
-                if (bots.length == Object.keys(data).length) {
+                if (bots.filter((bot) => bot.at(1)).length == Object.keys(data).length) {
                     console.table(data);
 
                     dataLog[Number(Date.now())] = data;
@@ -74,11 +78,12 @@ app.get('/', (request, response) => {
                     });
                     // ! _______________________________________________________
 
-                    fs.writeFileSync('./data/data.json', JSON.stringify(dataLog), (err) => err);
+                    fs.writeFileSync('./data/data.json', JSON.stringify(dataLog), console.error);
 
-                    console.info('Keeping process running for 2 more minutes.');
+                    console.info('Ending processes...');
 
-                    new Promise((resolve) => setTimeout(resolve, 120000)).then(() => {
+                    new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+                        console.info(`Processes ended.`);
                         process.exit();
                     });
                 } else console.info(`Done with ${bot}, loading next one...`);

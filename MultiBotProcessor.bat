@@ -42,7 +42,7 @@ if "%git%" == "true" (
 
 echo Updating to latest git version...
 
-@REM git reset HEAD --hard
+git reset HEAD --hard
 
 git init
 git remote add origin https://github.com/PortalDiscordDevelopment/MultiBotRunner
@@ -73,7 +73,7 @@ cls
 echo Finished building files.
 echo Starting script...
 
-start http://localhost:4444
+echo You can find a browser version of cmd here: http://localhost:4444
 start https://portaldiscorddevelopment.github.io/MultiBotRunner/
 
 :loop
@@ -91,8 +91,13 @@ cls
 
 
 echo.
-echo Script finished, running again in....
+@echo off
 
-sleep 20
+set "HH=%time:~0,2%"
+set "MM=%time:~3,2%"
+set /A "loopTime=(%HH% + 1) %% 24"
+echo script finished, running again at %loopTime%:%MM% %date%
+
+sleep 3600
 
 goto loop
