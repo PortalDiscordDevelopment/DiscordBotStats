@@ -11,7 +11,7 @@
     "author": "Dummi",
     "license": "MIT",
     "dependencies": {
-        "xernerx": "^4.4.16"
+        "xernerx": "^4.5.1"
     },
     "devDependencies": {
         "nodemon": "^3.0.1",
