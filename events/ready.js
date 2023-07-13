@@ -1,6 +1,6 @@
-import { XernerxBuilder } from 'xernerx';
+import { XernerxEvent } from 'xernerx';
 
-export default class ReadyEvent extends XernerxBuilder {
+export default class ReadyEvent extends XernerxEvent {
     constructor() {
         super('ready', {
             name: 'ready',
