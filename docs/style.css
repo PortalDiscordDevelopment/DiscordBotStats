@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    padding: 15px;
+    background-color: #f5f5ff;
+}
+
+.thLeft {
+    border-top-left-radius: 0.5rem;
+}
+
+.thRight {
+    border-top-right-radius: 0.5rem;
+}
+
+.tdLeft {
+    text-align: left;
+}
+
+.tdMid {
+    border-left: 1px solid black;
+    text-align: center;
+}
+
+th {
+    padding: 20px;
+    background-color: #4c39b5;
+    color: white;
+}
+
+.gain {
+    color: #55cc00;
+}
+
+.loss {
+    color: red;
+}
+
+#dataTable {
+    overflow: auto;
+}
+
+.chart {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 55vh;
+    width: 80vw;
+    padding: 15px;
+    background-color: white;
+    border-radius: 0.5rem;
+    margin: 10px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.dtable {
+    height: 75vh;
+}
+
+.columns {
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    color: #dbd7f0;
+}

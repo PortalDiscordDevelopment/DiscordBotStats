@@ -1,5 +1,4 @@
 import { XernerxShardClient } from 'xernerx';
-import express from 'express';
 import * as fs from 'fs';
 import tokens from './data/tokens.js';
 import { exec } from 'child_process';
@@ -8,20 +7,9 @@ import { promisify } from 'util';
 const shell = promisify(exec);
 
 const bots = Object.entries(tokens);
-const app = express();
 const data = {};
 
 const dataLog = JSON.parse(fs.readFileSync('./data/data.json', 'utf-8'));
-
-app.set('view engine', 'ejs');
-
-app.get('/', (request, response) => {
-    const table = Object.entries(data)
-        .map(([bot, stats]) => `<tr><td class="bot">${bot}</td><td>${stats.guildCount}</td><td>${stats.userCount}</td><td>${stats.shardCount}</td></tr>`)
-        .join('');
-
-    response.render('index', { table, data });
-});
 
 (async () => {
     await shell('mkdir bots').catch((e) => e);
@@ -91,5 +79,3 @@ app.get('/', (request, response) => {
         }, 1000);
     }
 })();
-
-app.listen(4444);

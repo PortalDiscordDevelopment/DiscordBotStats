@@ -73,7 +73,6 @@ cls
 echo Finished building files.
 echo Starting script...
 
-echo You can find a browser version of cmd here: http://localhost:4444
 start https://portaldiscorddevelopment.github.io/MultiBotRunner/
 
 :loop
@@ -84,12 +83,20 @@ call npx prettier --write data/data.json
 
 git add data/data.json
 git commit -m "Data log update"
-git push
+git push origin main
 
 echo Updated data log!
 cls
 
 
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
 echo.
 @echo off
 
@@ -98,6 +105,6 @@ set "MM=%time:~3,2%"
 set /A "loopTime=(%HH% + 1) %% 24"
 echo script finished, running again at %loopTime%:%MM% %date%
 
-sleep 3600
+timeout /t 60
 
 goto loop
