@@ -105,6 +105,6 @@ set "MM=%time:~3,2%"
 set /A "loopTime=(%HH% + 1) %% 24"
 echo script finished, running again at %loopTime%:%MM% %date%
 
-timeout /t 60
+timeout /t 3600
 
 goto loop
