@@ -2780,5 +2780,18 @@
         "ToDoListBot": { "guildCount": 3176, "userCount": 458786, "shardCount": 3 },
         "YourApps": { "guildCount": 977, "userCount": 347834, "shardCount": 1 },
         "Zodiac": { "guildCount": 610, "userCount": 171317, "shardCount": 1 }
+    },
+    "1689599017569": {
+        "Amplifier": { "guildCount": 154, "userCount": 12748, "shardCount": 1 },
+        "ChannelManager": { "guildCount": 2, "userCount": 84, "shardCount": 1 },
+        "Essence": { "guildCount": 2, "userCount": 83, "shardCount": 1 },
+        "Metamorphosis": { "guildCount": 199, "userCount": 87991, "shardCount": 1 },
+        "PortalQuiz": { "guildCount": 91, "userCount": 18815, "shardCount": 1 },
+        "RobloxUtilities": { "guildCount": 3981, "userCount": 602794, "shardCount": 4 },
+        "SupercellUtilities": { "guildCount": 7, "userCount": 449, "shardCount": 1 },
+        "TimeCard": { "guildCount": 4, "userCount": 429, "shardCount": 1 },
+        "ToDoListBot": { "guildCount": 3176, "userCount": 458796, "shardCount": 3 },
+        "YourApps": { "guildCount": 977, "userCount": 347841, "shardCount": 1 },
+        "Zodiac": { "guildCount": 609, "userCount": 171296, "shardCount": 1 }
     }
 }
