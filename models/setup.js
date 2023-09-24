@@ -12,6 +12,8 @@ const config = JSON.stringify({
 (async () => {
     const shell = promisify(exec);
 
+    await shell('mkdir data').catch(() => true);
+
     const dir = fs.readdirSync('./data');
 
     log('Installing dependencies...');
@@ -42,6 +44,8 @@ const config = JSON.stringify({
     if (!dir.includes('config.json')) {
         log('Config file not existant, creating one.', 'error');
         await shell(`echo ${config} > ./data/config.json`);
+
+        log('Navigate over to ./data/config.json and add your bots and tokens and the local guild id!');
     } else log('Config file found!');
 
     log('Finished building files!');

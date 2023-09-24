@@ -26,7 +26,10 @@ const dataLog = JSON.parse(fs.readFileSync('./data/data.json', 'utf-8'));
 
         log(`Updating ${bot} code`);
 
-        fs.writeFileSync(`./bots/${bot}.js`, `import { Client } from '../main.js';\nimport tokens from '../data/tokens.js';\n\nconst client = new Client();\nclient.login(tokens.${bot});`);
+        fs.writeFileSync(
+            `./bots/${bot}.js`,
+            `import { Client } from '../main.js';\nimport config from '../data/config.json' assert {type:'json'};\n\nconst client = new Client();\nclient.login(config.tokens.${bot});`
+        );
 
         let { shards, stats } = new XernerxShardClient(`./bots/${bot}.js`, { token, respawn: true }, { log: { info: true } });
 

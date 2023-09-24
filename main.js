@@ -18,7 +18,7 @@ export class Client extends XernerxClient {
             },
             {
                 global: false, // Whether the bot is loaded globally or locally
-                local: config.guild, // The developer guild.
+                local: config.guildId, // The developer guild.
                 log: {
                     ready: true, // Log when the bot is ready and logged in.
                     error: true, // Log when an internal error occurs.

@@ -30,11 +30,11 @@ if "%git%" == "true" (
 
 echo Updating to latest git version...
 
-
-
 git clone https://github.com/PortalDiscordDevelopment/DiscordBotStats .
 
 echo Finished updating to latest git version.
+
+call npm i
 
 call node ./models/setup.js
 
