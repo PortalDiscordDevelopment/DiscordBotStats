@@ -18,16 +18,18 @@ In this config file you'll see the following boilerplate code:
 
 ```json
 {
-    "rate":3600000,
-    "guildId":"Insert Your Guild ID here",
-    "tokens":{}
-} 
+    "rate": 3600000,
+    "guildId": "Insert Your Guild ID here",
+    "tokens": {}
+}
 ```
+
 If you don't see this, copy and paste the code into the config.json. Once you're there change the `guildId` to the guild that all your bots share, **ALL BOTS ARE MANDATORY TO JOIN THIS GUILD!**
 
 for tokens you'll just prefix the bot name and then it's token.
+
 ```json
 {
-    "BotName":"BotToken"
+    "BotName": "BotToken"
 }
 ```
