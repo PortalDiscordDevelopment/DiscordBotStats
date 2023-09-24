@@ -2,6 +2,8 @@
  ** Making use of xernerx for ease of access.
  */
 import XernerxClient from 'xernerx';
+
+import config from './data/config.json' assert { type: 'json' };
 /**
  ** Import any bot token token from the token file.
  **
@@ -16,7 +18,7 @@ export class Client extends XernerxClient {
             },
             {
                 global: false, // Whether the bot is loaded globally or locally
-                local: '916752657413181450', // The developer guild.
+                local: config.guild, // The developer guild.
                 log: {
                     ready: true, // Log when the bot is ready and logged in.
                     error: true, // Log when an internal error occurs.

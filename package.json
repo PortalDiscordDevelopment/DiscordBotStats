@@ -7,14 +7,13 @@
     "scripts": {
         "start": "start MultiBotProcessor.bat"
     },
-    "keywords": [],
     "author": "Dummi",
     "license": "MIT",
     "dependencies": {
-        "xernerx": "^4.5.1"
+        "xernerx": "4.5.1"
     },
     "devDependencies": {
-        "nodemon": "^3.0.1",
-        "prettier": "^2.8.8"
+        "nodemon": "3.0.1",
+        "prettier": "2.8.8"
     }
 }

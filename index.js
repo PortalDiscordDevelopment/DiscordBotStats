@@ -1,12 +1,14 @@
 import { XernerxShardClient } from 'xernerx';
 import * as fs from 'fs';
-import tokens from './data/tokens.js';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 
+import config from './data/config.json' assert { type: 'json' };
+import log from './models/log.js';
+
 const shell = promisify(exec);
 
-const bots = Object.entries(tokens);
+const bots = Object.entries(config.tokens);
 const data = {};
 
 const dataLog = JSON.parse(fs.readFileSync('./data/data.json', 'utf-8'));
@@ -16,13 +18,13 @@ const dataLog = JSON.parse(fs.readFileSync('./data/data.json', 'utf-8'));
 
     for (const [bot, token] of bots) {
         if (!token) {
-            console.warn(`No token for ${bot} provided. Skipping...`);
+            log(`No token for ${bot} provided. Skipping...`, 'error');
             continue;
         }
 
-        console.info(`Starting ${bot}!`);
+        log(`Starting ${bot}!`);
 
-        console.info(`Updating ${bot} code`);
+        log(`Updating ${bot} code`);
 
         fs.writeFileSync(`./bots/${bot}.js`, `import { Client } from '../main.js';\nimport tokens from '../data/tokens.js';\n\nconst client = new Client();\nclient.login(tokens.${bot});`);
 
@@ -68,13 +70,13 @@ const dataLog = JSON.parse(fs.readFileSync('./data/data.json', 'utf-8'));
 
                     fs.writeFileSync('./data/data.json', JSON.stringify(dataLog), console.error);
 
-                    console.info('Ending processes...');
+                    log('Ending processes...');
 
                     new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-                        console.info(`Processes ended.`);
+                        log(`Processes ended.`);
                         process.exit();
                     });
-                } else console.info(`Done with ${bot}, loading next one...`);
+                } else log(`Done with ${bot}, loading next one...`);
             }
         }, 1000);
     }

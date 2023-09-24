@@ -1,20 +1,8 @@
 @REM configuration options
 @echo off
 set dirname=%cd%
-title MultiBotProcessor
+title Discord Bots Stats
 color 0b
-
-echo Looking for data/tokens.js...
-
-if exist "%dirname%\data\tokens.js" (
-    echo Found %dirname%\data\tokens.js file.
-) else (
-    echo Couldn't find tokens.js in %dirname%\data, make sure this file is located in %dirname%\data and named tokens.js, opening file explorer.
-    cd data
-    explorer .
-    pause
-    exit
-)
 
 echo Checking for Node...
 
@@ -42,63 +30,19 @@ if "%git%" == "true" (
 
 echo Updating to latest git version...
 
-git reset HEAD --hard
 
-git init
-git remote add origin https://github.com/PortalDiscordDevelopment/MultiBotRunner
-git pull --set-upstream origin main
-cls
+
+git clone https://github.com/PortalDiscordDevelopment/DiscordBotStats .
 
 echo Finished updating to latest git version.
-echo Installing dependencies...
 
-call npm i
-call npm audit fix -f
-cls
-call npm audit fix -f
-cls
-
-echo Finished installing dependencies.
-echo Funding credits...
-
-call npm fund 
-cls
-
-echo Finished funding.
-echo Building files...
-
-call npx prettier --write .
-cls
-
-echo Finished building files.
-echo Starting script...
-
-start https://portaldiscorddevelopment.github.io/MultiBotRunner/
+call node ./models/setup.js
 
 :loop
+
 call node .
 
-echo Updating data log...
-call npx prettier --write data/data.json
-
-git add data/data.json
-git commit -m "Data log update"
-git push origin main
-
-echo Updated data log!
-cls
-
-
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-@echo off
+call node ./models/format.js
 
 set "HH=%time:~0,2%"
 set "MM=%time:~3,2%"
